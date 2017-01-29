@@ -31,6 +31,7 @@ server.use(session({
   cookie: { secure: true }
  }));
 server.use('/scripts', express.static(path.join(__dirname, 'node_modules')));
+//server.use('/views', express.static(path.join(__dirname, 'node_modules')));
 server.use('/', express.static(path.join(__dirname, 'public'))) ; 
 var api = require('./app/routes/api.js');
 require('./app/config/passport.js');

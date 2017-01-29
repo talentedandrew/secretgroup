@@ -1,18 +1,18 @@
 (function () {
 
   angular
-    .module('meanApp')
+    .module('mySecret12')
     .service('authentication', authentication);
 
-  authentication.$inject = ['$http', '$window'];
-  function authentication ($http, $window) {
+  authentication.$inject = ['$http', '$window','$q'];
+  function authentication ($http, $window,$q) {
 
     var saveToken = function (token) {
-      $window.localStorage['mean-token'] = token;
+      $window.localStorage['bearer-token'] = token;
     };
 
     var getToken = function () {
-      return $window.localStorage['mean-token'];
+      return $window.localStorage['bearer-token'];
     };
 
     var isLoggedIn = function() {
@@ -44,19 +44,15 @@
     };
 
     register = function(user) {
-      return $http.post('/api/register', user).success(function(data){
-        saveToken(data.token);
-      });
+      return $http.post('/api/register', user);
     };
 
     login = function(user) {
-      return $http.post('/api/login', user).success(function(data) {
-        saveToken(data.token);
-      });
+      return $http.post('/api/login', user);
     };
 
     logout = function() {
-      $window.localStorage.removeItem('mean-token');
+      $window.localStorage.removeItem('bearer-token');
     };
 
     return {

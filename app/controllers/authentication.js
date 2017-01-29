@@ -42,7 +42,9 @@ module.exports.login = function(req, res) {
     // If a user is found
     if(user){
       var token;
-      token = user.generateJwt();  
+      token = user.generateJwt();
+      user = user.toObject();
+      delete user.password;  
       res.json({success:true, token : token , user:user})
     } else {
       res.json({success:false,message:"No such user found in our database entry"})

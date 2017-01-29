@@ -2,33 +2,45 @@
 
   angular.module('mySecret12', ['ui.router',]);
 
-  function config($stateProvider) {
-  var helloState = {
-    name: 'hello',
-    url: '/hello',
-    template: '<h3>hello world!</h3>'
-  }
-
-  var aboutState = {
-    name: 'about',
-    url: '/about',
-    template: '<h3>Its the UI-Router hello world app!</h3>'
-  }
-
-  $stateProvider.state(helloState);
-  $stateProvider.state(aboutState);
-};
-  function run($rootScope, $location, authentication) {
-    $rootScope.$on('$routeChangeStart', function(event, nextRoute, currentRoute) {
-      if ($location.path() === '/profile' && !authentication.isLoggedIn()) {
-        $location.path('/');
+  function config($stateProvider, $urlRouterProvider) {
+    $stateProvider
+      .state({
+        name: 'register',
+        url: '/register',
+        templateUrl: './views/register.html',
+        controller: 'registerCtrl',
+        controllerAs: 'vm'
+      })
+      .state({
+        name: 'login',
+        url: '/login',
+        templateUrl: './views/login.html',
+        controller: 'loginCtrl',
+        controllerAs: 'vm'
+      })
+      .state({
+        name: 'dashboard',
+        url: '/dashboard',
+        templateUrl: './views/dashboard.html',
+        controller: 'dashboardCtrl',
+        controllerAs: 'vm'
+      });
+    $urlRouterProvider.otherwise('/login');
+  };
+  function run($rootScope, $state, authentication) {
+    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+      if (toState.name === 'dashboard' && !authentication.isLoggedIn()) {
+        event.preventDefault();
+        $state.go('login');
       }
+
+
     });
   }
-  
+
   angular
     .module('mySecret12')
-    .config(["$stateProvider", config]);
-    // .run(['$rootScope', '$location', 'authentication', run]);
+    .config(["$stateProvider", "$urlRouterProvider", config])
+    .run(['$rootScope', '$state', 'authentication', run]);
 
 })();

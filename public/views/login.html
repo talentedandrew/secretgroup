@@ -1,0 +1,15 @@
+<div class="login-container">
+    <a ui-sref='register' id="register">Dont have an account?</a>
+    <form name="loginForm" ng-submit="loginForm.$valid && vm.onSubmit()">
+
+        <div class="loginform">
+            <div class="forceColor"></div>
+            <div class="topbar" ng-class="{'error' : loginForm.$submitted && loginForm.$invalid}">
+                <div class="spanColor"></div>
+                <input type="email" class="input" id="email" required placeholder="Email" ng-model="vm.credentials.email" />
+                <input type="password" class="input" id="password" required placeholder="Password" ng-model="vm.credentials.password" />
+            </div>
+            <button type="submit" class="submit" id="submit">Login</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,42 @@
+<div class="login-container">
+    <a ui-sref='login' id="register">I have an Account</a>
+    <form name="registerForm" ng-submit="registerForm.$valid && vm.onSubmit()" novalidate>
+
+        <div class="registerform">
+            <div class="forceColor"></div>
+            <div class="topbar" ng-class="{'error' : registerForm.$submitted && registerForm.$invalid}">
+                <div class="spanColor"></div>
+                <input type="text" class="input" name="firstname" required placeholder="Firstname" ng-model="vm.credentials.firstName" ng-minlength="2"
+                    ng-maxlength="20" />
+                <span class="error" ng-show="registerForm.$submitted && registerForm.firstname.$error.required">Enter your first name here</span>
+                <span class="error" ng-show="registerForm.$submitted && registerForm.firstname.$error.minlength">Your name is too short.Thats not possible!</span>
+                <span class="error" ng-show="registerForm.$submitted && registerForm.firstname.$error.maxlength">Your name is too long.We cant register you!Sorry</span>
+                <input type="text" class="input" name="lastname" required placeholder="Lastname" ng-model="vm.credentials.lastName" ng-minlength="1"
+                    ng-maxlength="20" />
+                <span class="error" ng-show="registerForm.$submitted && registerForm.lastname.$error.required">Enter your last name here</span>
+                <span class="error" ng-show="registerForm.$submitted && registerForm.lastname.$error.minlength">Your name is too short.Thats not possible!</span>
+                <span class="error" ng-show="registerForm.$submitted && registerForm.lastname.$error.maxlength">Your name is too long.We cant register you!Sorry</span>
+                <input type="email" class="input" name="email" required placeholder="Email" ng-model="vm.credentials.email" />
+                <span class="error" ng-show="registerForm.$submitted && registerForm.email.$error.required">Enter your email here</span>
+                <input type="text" class="input" name="contact" required placeholder="Mobile No." ng-model="vm.credentials.contact" ng-pattern="/^[7-9][0-9]{9}$/"
+                />
+                <span class="error" ng-show="registerForm.$submitted && registerForm.contact.$error.required">Enter your mobile number here</span>
+                <span class="error" ng-show="registerForm.$submitted && registerForm.contact.$error.pattern">Enter a valid mobile number here</span>
+                <input type="username" class="input" name="username" required placeholder="Username" ng-model="vm.credentials.userName" />
+                <span class="error" ng-show="registerForm.$submitted && registerForm.username.$error.required">Enter a username here</span>
+                <input type="number" class="input" name="age" required placeholder="Age" ng-model="vm.credentials.age" />
+                <span class="error" ng-show="registerForm.$submitted && registerForm.age.$error.required">Enter your age here</span>
+                <!--<span class="error" ng-show="registerForm.$submitted && registerForm.age.$error.minlength">Sorry but you are underage for this!</span>-->
+                <input type="password" class="input" name="password" required placeholder="Password" ng-model="vm.credentials.password" ng-minlength="8"
+                    ng-maxlength="20" ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" />
+                <span class="error" ng-show="registerForm.$submitted && registerForm.password.$error.required">Enter your password here</span>
+                <span class="error" ng-show="registerForm.$submitted && registerForm.password.$error.minlength">Passwords must be between 8 and 20 characters.</span>
+                <span class="error" ng-show="registerForm.$submitted && registerForm.password.$error.pattern">Must contain one lower &amp; uppercase letter, and one non-alpha character (a number or a symbol.)</span>
+                <input type="text" class="input" name="confirmPassword" required placeholder="Confirm Password" ng-model="vm.credentials.cpassword" valid-password-c="vm.credentials.password" />
+                <span class="error" ng-show="registerForm.$submitted && registerForm.confirmPassword.$error.required">Confirm your password</span>
+                <span class="error" ng-show="registerForm.$submitted && registerForm.confirmPassword.$error.noMatch">password did not match</span>
+            </div>
+            <button type="submit" class="submit" name="submit">Register</button>
+        </div>
+    </form>
+</div>
