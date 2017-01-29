@@ -1,0 +1,5 @@
+{
+    "dbURL" : "mongodb://admin:admin@ds155737.mlab.com:55737/mysecret12",
+    "secretKey" : "DL2CV975"
+
+}
