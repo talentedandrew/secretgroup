@@ -5,8 +5,8 @@ var mongoose = require('mongoose'),
     config = require('../../config/config.js'),
     sectretKey = config.secretKey;
 var userSchema = new Schema({
-    firstname: String,
-    lastname: String,
+    firstname: { type: String, reuired: true },
+    lastname: { type: String, reuired: true },
     username: { type: String, reuired: true, index: true, unique: true },
     email: { type: String, reuired: true, unique: true },
     age: {
@@ -33,6 +33,15 @@ var userSchema = new Schema({
     },
     updated: {
         type: Date
+    },
+    isActive: { type: Boolean, default: false },
+    rooms: {
+        type: [ {
+                type: Schema.Types.ObjectId,
+                ref: 'rooms'
+           
+        }],
+        validate: [arrayLimit, '{PATH} exceeds the limit of 12']
     }
 
 });
@@ -73,10 +82,10 @@ var roomSchema = new Schema({
     createdAt: { type: Date, default: Date.now },
     members: {
         type: [{
-            member: {
+            
                 type: Schema.Types.ObjectId,
                 ref: 'users'
-            }
+           
         }],
         validate: [arrayLimit, '{PATH} exceeds the limit of 12']
     }

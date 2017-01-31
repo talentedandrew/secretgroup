@@ -2,20 +2,13 @@
 
   angular
     .module('mySecret12')
-    .service('authentication', authentication);
+    .service('roomService', roomService);
 
-  authentication.$inject = ['$http', '$window','$q'];
-  function authentication ($http, $window,$q) {
+  roomService.$inject = ['$http', '$window','$q'];
+  function roomService ($http, $window,$q) {
 
     var saveToken = function (token) {
       $window.localStorage['bearer-token'] = token;
-    };
-
-    var getId = function () {
-      return $window.localStorage['user-id'];
-    };
-    var saveId = function (id) {
-      $window.localStorage['user-id'] = id;
     };
 
     var getToken = function () {
@@ -50,8 +43,8 @@
       }
     };
 
-    register = function(user) {
-      return $http.post('/api/register', user);
+    addRoom = function(room) {
+      return $http.post('/api/addroom', room);
     };
 
     login = function(user) {
@@ -66,10 +59,8 @@
       currentUser : currentUser,
       saveToken : saveToken,
       getToken : getToken,
-      saveId : saveId,
-      getId : getId,
       isLoggedIn : isLoggedIn,
-      register : register,
+      addRoom : addRoom,
       login : login,
       logout : logout
     };

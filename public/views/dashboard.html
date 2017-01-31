@@ -1,2 +1,16 @@
-<h1>You have successfully logged in</h1>
-<h3>Now Please Log Out...<h3><a ng-click="vm.logout()">LOGOUT</a>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-9 col-md-9 col-xs-7">
+            <h1>You have successfully logged in</h1>
+            <h3>Now Please Log Out...
+                <h3><a ng-click="vm.logout()">LOGOUT</a>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-5" id="right-section">
+            <h1>Create Your Room</h1>
+            <form name="addRoomForm" novalidate ng-submit="addRoomForm.$valid && vm.createRoom()">
+                <input placeholder="Room Name" ng-model="vm.room.roomName" name="roomname" type="text">
+                <input placeholder="Add room" type="submit">
+            </form>
+        </div>
+    </div>
+</div>

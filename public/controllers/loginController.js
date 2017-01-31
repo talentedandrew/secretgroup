@@ -19,6 +19,7 @@
             .login(vm.credentials)
             .then(function (data) {
                 authentication.saveToken(data.data.token);
+                authentication.saveId(data.data.user._id);
                 $state.go('dashboard');
             })
             .catch(function (error) {
