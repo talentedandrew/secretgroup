@@ -1,4 +1,3 @@
-var passport = require('passport');
 var mongoose = require('mongoose');
 var User = require('../models/users.js').user;
 var Room = require('../models/users.js').room;
@@ -57,7 +56,45 @@ module.exports.searchroombyid = function (req, res) {
             else {
                 console.log(decoded);
                 var id = req.params.roomId;
-                Room.findOne({ '_id': id })
+                Room.find({ '_id': id })
+                    .populate('createdBy', '_id firstname lastname email')
+                    .populate('members', '_id firstname lastname email')
+                    .exec(function (error, room) {
+                        if (error) {
+                            res.json({ success: false, room: null })
+                            return;
+                        }
+                        res.json({ success: true, room: room })
+                    });
+            }
+        });
+
+
+    }
+    else {
+        res.sendFile(path.join(__dirname, '../../public', 'tokenerror.html'));
+    }
+
+
+};
+module.exports.searchroombyuser = function (req, res) {
+    var auth = req.headers['authorization'];
+    if (auth) {
+        var token = auth.split(' ')[1];
+        jwt.verify(token, sectretKey, function (err, decoded) {
+            if (err) {
+                if (err.name === 'JsonWebTokenError') {
+                    res.sendFile(path.join(__dirname, '../../public', 'tokenerror.html'));
+                }
+                else if (err.name === 'TokenExpiredError') {
+                    res.sendFile(path.join(__dirname, '../../public', 'tokenexpired.html'));
+                }
+
+            }
+            else {
+                console.log(decoded);
+                var id = req.params.userId;
+                Room.find({ 'createdBy': id })
                     .populate('createdBy', '_id firstname lastname email')
                     .populate('members', '_id firstname lastname email')
                     .exec(function (error, newroom) {
@@ -79,6 +116,44 @@ module.exports.searchroombyid = function (req, res) {
 
 };
 
+module.exports.searchroombymember = function (req, res) {
+    var auth = req.headers['authorization'];
+    if (auth) {
+        var token = auth.split(' ')[1];
+        jwt.verify(token, sectretKey, function (err, decoded) {
+            if (err) {
+                if (err.name === 'JsonWebTokenError') {
+                    res.sendFile(path.join(__dirname, '../../public', 'tokenerror.html'));
+                }
+                else if (err.name === 'TokenExpiredError') {
+                    res.sendFile(path.join(__dirname, '../../public', 'tokenexpired.html'));
+                }
+
+            }
+            else {
+                console.log(decoded);
+                var id = req.params.memberId;
+                Room.find({ 'members': id, 'createdBy': { $ne: id } })
+                    .populate('createdBy', '_id firstname lastname email')
+                    .populate('members', '_id firstname lastname email')
+                    .exec(function (error, room) {
+                        if (error) {
+                            res.json({ success: false, rooms: null })
+                            return;
+                        }
+                        res.json({ success: true, rooms: room })
+                    });
+            }
+        });
+
+
+    }
+    else {
+        res.sendFile(path.join(__dirname, '../../public', 'tokenerror.html'));
+    }
+
+
+};
 
 //API for adding rooms
 module.exports.addroom = function (req, res) {
@@ -142,6 +217,50 @@ module.exports.addroom = function (req, res) {
 
 };
 
+//API for removing room
+module.exports.removeroom = function (req, res) {
+    var auth = req.headers['authorization'];
+    if (auth) {
+        var token = auth.split(' ')[1];
+        jwt.verify(token, sectretKey, function (err, decoded) {
+            if (err) {
+                if (err.name === 'JsonWebTokenError') {
+                    res.sendFile(path.join(__dirname, '../../public', 'tokenerror.html'));
+                }
+                else if (err.name === 'TokenExpiredError') {
+                    res.sendFile(path.join(__dirname, '../../public', 'tokenexpired.html'));
+                }
+                console.log(decoded);
+            }
+            else {
+                var userId = req.params.userId;
+                var roomId = req.params.roomId;
+                Room.findById( {_id : roomId}, function (error, newroom) {
+                    if (error) {
+                        res.json({ success: false, message: "something went wrong, please try again"});
+
+                    }
+                    else {
+                        newroom.remove();
+                        res.json({ success: true, message: "room has been removed successfully"});
+                        
+                    }
+
+
+                });
+            }
+        });
+
+
+    }
+    else {
+        res.sendFile(path.join(__dirname, '../../public', 'tokenerror.html'));
+    }
+
+};
+
+
+
 //API for adding members to a room
 module.exports.addmember = function (req, res) {
     var auth = req.headers['authorization'];
@@ -172,7 +291,21 @@ module.exports.addmember = function (req, res) {
                             res.json({ success: false, message: "member already added in the group" })
                         }
                         else {
-                            res.json({ success: true, message: "member added successfully" })
+                            User.update(
+                                { _id: req.body.member, 'rooms': { $ne: req.body.roomId } },
+                                { $addToSet: { "rooms": req.body.roomId } },
+                                function (error, result) {
+                                    if (error) {
+                                        res.json({ success: false, message: "member was not added successfully" })
+                                        return;
+                                    }
+                                    else {
+                                        res.json({ success: true, message: "member added successfully" })
+                                    }
+
+                                }
+                            );
+
                         }
 
                     }

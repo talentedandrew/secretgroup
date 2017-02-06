@@ -1,16 +1,45 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-9 col-md-9 col-xs-7">
-            <h1>You have successfully logged in</h1>
-            <h3>Now Please Log Out...
-                <h3><a ng-click="vm.logout()">LOGOUT</a>
+        <div class="col-lg-9 col-md-9 col-xs-7" id="left-section" ng-init="vm.getAllRooms();vm.getAddedRooms();">
+            <div class="roomsContainer" mb-scrollbar="vm.scrollbar('horizontal', false, true)">
+                <div ng-repeat="room in vm.rooms" class="rooms">
+                    <h1>{{room.roomname}}</h1>
+                    <i class="fa fa-user-secret" aria-hidden="true"></i>
+                    <div class="overlay">
+                        <span  uib-tooltip="Room Details" tooltip-placement="right" class="fa fa-info" aria-hidden="true"></span>
+                        <span uib-tooltip="Remove Room" tooltip-placement="top" ng-click="vm.deleteRoom(room._id)" class="fa fa-trash" aria-hidden="true"></span>
+                        <span uib-tooltip="Enter Room" tooltip-placement="left" ui-sref='room({roomId : room._id})' class="fa fa-sign-in" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <p ng-if="!vm.rooms.length">You have not created any room. Go ahead and do it!</p>
+            </div>
+            <div class="roomsContainer" mb-scrollbar="vm.scrollbar('horizontal', false, true)">
+                <div ng-repeat="room in vm.addedRooms" class="rooms">
+                    <h1>{{room.roomname}}</h1>
+                    <i class="fa fa-user-secret" aria-hidden="true"></i>
+                    <div class="overlay">
+                        <span uib-tooltip="Room Details" tooltip-placement="right" class="fa fa-info" aria-hidden="true"></span>
+                        <span uib-tooltip="Remove Room" tooltip-placement="top" class="fa fa-trash" aria-hidden="true"></span>
+                        <span uib-tooltip="Enter Room" tooltip-placement="left" ui-sref='room({roomId : room._id})' class="fa fa-sign-in" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <p ng-if="!vm.addedRooms.length">You are not added in any room by any member</p>
+            </div>
         </div>
         <div class="col-lg-3 col-md-3 col-xs-5" id="right-section">
-            <h1>Create Your Room</h1>
-            <form name="addRoomForm" novalidate ng-submit="addRoomForm.$valid && vm.createRoom()">
-                <input placeholder="Room Name" ng-model="vm.room.roomName" name="roomname" type="text">
-                <input placeholder="Add room" type="submit">
-            </form>
-        </div>
-    </div>
+            <div class="profilePicContainer" style="background-image:url('./images/profilepic.jpg')">
+<a class="editProfilePIc"><i class="glyphicon glyphicon-wrench"></i></a>
+</div>
+<a class="addRoomButton shake" uib-tooltip="Add Your Room" tooltip-placement="bottom" ng-click="vm.openAddRoom()" ng-show="vm.showRoomButton"><i class="fa fa-plus"></i></a>
+<div class="addRoomFormContainer" ng-class="{'flipInY': !vm.showRoomButton}" ng-if="!vm.showRoomButton">
+    <form name="addRoomForm" novalidate ng-submit="addRoomForm.$valid && vm.createRoom()">
+        <input placeholder="Room Name" ng-model="vm.room.roomName" name="roomname" type="text">
+        <input placeholder="Add room" type="submit">
+        <span class="closeAddRoom fa fa-times" ng-click="vm.openAddRoom();"></span>
+    </form>
+</div>
+<a class="logoutButton " uib-tooltip="LOGOUT" tooltip-placement="bottom" ng-click="vm.logout()"><i class="fa fa-sign-out"></i></a>
+
+</div>
+</div>
 </div>

@@ -21,7 +21,13 @@
     var getToken = function () {
       return $window.localStorage['bearer-token'];
     };
-
+    
+    var saveName = function (name) {
+      $window.localStorage['user-name'] = name.firstname + " "+ name.lastname;
+    };
+    var getName = function () {
+      return $window.localStorage['user-name'];
+    };
     var isLoggedIn = function() {
       var token = getToken();
       var payload;
@@ -68,6 +74,8 @@
       getToken : getToken,
       saveId : saveId,
       getId : getId,
+      saveName : saveName,
+      getName : getName,
       isLoggedIn : isLoggedIn,
       register : register,
       login : login,

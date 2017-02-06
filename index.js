@@ -9,12 +9,21 @@ var express = require('express'),
     mongoose = require('mongoose'),
     db = mongoose.connection,
     passport = require('passport'),  
-    LocalStrategy = require('passport-local').Strategy;  
+    LocalStrategy = require('passport-local').Strategy,
+    http = require('http').Server(server),
+    io = require('socket.io')(http);  
 
-server.listen(process.env.PORT || 3000, function () {
-    console.log('server is listening in port 3000!');
-})
-console.log(config.dbURL);
+// server.listen(process.env.PORT || 3000, function () {
+//     console.log('server is listening in port 3000!');
+// });
+
+
+require('./app/socket/socket.js')(io);
+
+http.listen(3000, function(){
+  console.log('listening on *:3000');
+});
+
 mongoose.connect(config.dbURL);
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {

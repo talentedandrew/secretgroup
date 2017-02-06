@@ -4,11 +4,20 @@
   <title>MY SECRET 12</title>
   <link rel="stylesheet" href="/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/animate.css">
+  <link rel="stylesheet" href="./scripts/ng-toast/dist/ngToast.min.css">
   <link rel="stylesheet" href="/css/styles.css">
 
   <script src="./scripts/angular/angular.min.js"></script>
   <script src="./scripts/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
   <script src="./scripts/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script src="./scripts/angular-sanitize/angular-sanitize.min.js"></script>
+  <script src="./scripts/ng-toast/dist/ngToast.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.js"></script>
+  <script src="./scripts/angular-socket-io/socket.min.js"></script>
+  
+  
   <script src="./main.js"></script>
   <!--Directives-->
   <script src="./directives/passmatch.js"></script>
@@ -16,11 +25,14 @@
   <script src="./controllers/loginController.js"></script>
   <script src="./controllers/registerController.js"></script>
   <script src="./controllers/dashboardController.js"></script>
+  <script src="./controllers/roomController.js"></script>
   <!--services-->
   <script src="./services/authentication.service.js"></script>
   <script src="./services/room.service.js"></script>
+  <script src="./services/mb-scrollbar.js"></script>
 </head>
 <body ng-app="mySecret12">
+    <toast></toast>
     <ui-view></ui-view>
 </body>
 </html>

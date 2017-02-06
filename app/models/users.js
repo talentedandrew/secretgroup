@@ -91,8 +91,32 @@ var roomSchema = new Schema({
     }
 
 });
+roomSchema.pre('remove', function(next){
+    console.log('removed rooms');
+    this.model('users').update(
+        {_id: {$in: this.members}}, 
+        {$pull: {rooms: this._id}}, 
+        {multi: true},
+        next
+    );
+});
 function arrayLimit(val) {
     return val.length <= 12;
 }
+
+var chatSchema = new Schema({
+    roomId: {
+        type: Schema.Types.ObjectId,
+        ref: 'rooms'
+    },
+    message: { type: String, reuired: true },
+    createdBy: {
+        type: Schema.Types.ObjectId,
+        ref: 'users'
+    },
+    createdAt: { type: Date, default: Date.now }
+
+});
 module.exports.user = mongoose.model('users', userSchema);
 module.exports.room = mongoose.model('rooms', roomSchema);
+module.exports.chat = mongoose.model('chats', chatSchema);

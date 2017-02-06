@@ -4,6 +4,40 @@ body,html{
     height: 100%;
     
 }
+.thankyouContainer{
+    width: 100%;
+    height: 100%;
+    background: url(../images/loginbg.jpg) no-repeat fixed;
+    display: block;
+    position: relative;
+}
+.thankyouContainer h1{
+        width: 100%;
+    height: 80px;
+    font-size: 32px;
+    color: #ffffff;
+    text-align: center;
+    font-family: 'Cabin', sans-serif!important;
+    position: relative;
+    margin: 0;
+    position: absolute;
+    top: 30%;
+}
+
+.thankyouContainer a{
+        width: 100%;
+    height: 80px;
+    font-size: 27px;
+    color: #ffffff;
+    text-align: center;
+    font-family: 'Cabin', sans-serif!important;
+    margin: 0 auto;
+    display: block;
+    position: absolute;
+    top: 50%;
+    text-decoration: none;
+    cursor: pointer;
+}
 .login-container {
     width: 100%;
     height: 100%;
@@ -147,10 +181,65 @@ body,html{
 /*Dashboard*/
 #right-section{
     height: 100vh;
-    background: #454f4f;
+    background: #181d1d;
     font-size: 15px;
     padding: 15px;
-   text-align: center;
+    text-align: center;
+    overflow: auto;
+    overflow-x: hidden;
+}
+#right-section .profilePicContainer{
+    max-width: 150px;
+    max-height: 150px;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+}
+#right-section .profilePicContainer .editProfilePIc{
+    position: absolute;
+    top:-20px;
+    transition: all 0.5s ease-in-out;    
+}
+#right-section .profilePicContainer:hover .editProfilePIc{
+    top:100px;    
+}
+#right-section  .addRoomButton , #right-section  .logoutButton{
+    width: 80px;
+    height: 80px;
+    margin: 20px auto;
+    border: 2px solid #ffffff;
+    display: block;
+    border-radius: 50%;
+    font-size: 40px;
+    cursor: pointer;
+    background-color: #3eff77;
+    animation-duration: 3s;
+    animation-delay: 2s;
+    animation-iteration-count: infinite;
+}
+#right-section  .logoutButton{
+    background-color: #e74c3c;
+}
+#right-section  .addRoomButton:hover , #right-section  .logoutButton:hover{
+    animation-duration: 0s;
+}
+#right-section  .addRoomButton i,#right-section  .logoutButton i{
+    vertical-align: middle;
+    line-height: 75px;
+    color: #ffffff;
+}
+#right-section  .addRoomFormContainer{
+    width: 100%;
+    display: block;
+    animation-duration: 3s;
+    margin: 20px auto;
+        position: relative;
 }
 #right-section h1{
     width: 100%;
@@ -176,4 +265,284 @@ body,html{
     margin-bottom: 8px;
     margin-top: 5px;
     border: none;
+}
+#right-section  form .closeAddRoom{
+        position: absolute;
+    right: 0;
+    top: 2px;
+    display: block;
+    font-size: 25px;
+    color: white;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+#right-section  form .closeAddRoom:before{
+    vertical-align: middle;
+}
+#left-section{
+    height: 100vh;
+    background: #313535;
+    font-size: 15px;
+    padding: 15px;
+    overflow: auto;
+}
+.roomsContainer{
+    /*display: flex;
+  flex-wrap: nowrap;*/
+  /*overflow-x: auto;*/
+  padding: 20px;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  background-color: #000000;
+  /*display: block;*/
+  height: 260px;
+  width: 100%;
+  overflow: hidden;
+  margin: 30px auto;
+}
+.roomsContainer .rooms {
+  /*flex: 0 0 auto; */
+      background-color: #111b21;
+  display: inline-block;
+  width: 200px;
+  height: 200px;
+  border: 1px solid #ffffff;
+  margin: 0 30px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+ }
+ .roomsContainer .rooms h1{
+     width: 100%;
+     font-family: 'Cabin', sans-serif!important;
+     color: #ffffff;
+     font-size: 16px;
+     margin: 3px auto;
+     text-align: center;
+ }
+ .roomsContainer .rooms i{
+    display: block;
+    font-size: 100px;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 10px;
+ }
+ .roomsContainer .rooms .overlay{
+     display: block;
+     position: absolute;
+     height: 40px;
+     bottom: -50px;
+     width: 100%;
+     background-color: rgba(0, 0, 0, 0.4);
+     transition: all .3s ease-in;
+ }
+ .roomsContainer .rooms .overlay span{
+         float: left;
+    font-size: 25px;
+    color: #ffffff;
+    cursor: pointer;
+    display: block;
+    margin: 10px;
+ }
+ .roomsContainer .rooms .overlay span.fa-sign-in{
+     float: right;
+ }
+ .roomsContainer .rooms:hover .overlay{
+     bottom: 0;
+ }
+ .roomsContainer p{
+     width: 100%;
+     height: 200px;
+     text-align: center;
+     font-family: 'Cabin', sans-serif!important;
+         line-height: 150px;
+     font-size: 25px;
+     padding: 20px;
+     color: #ffffff;
+         position: absolute;
+ }
+ .profileContainer{
+    padding: 20px;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  background-color: #000000;
+  /*display: block;*/
+  height: 260px;
+  width: 100%;
+  overflow: hidden;
+  margin: 30px auto;
+}
+/*Room*/
+.roomContainer{
+    display: flex;
+    flex-wrap: nowrap;
+}
+.roomContainer .messageContainer{
+    width: calc(100% - 280px);
+    height: 100vh;
+    background-color: #303641;
+    flex: 0 0 auto;
+    position: relative;
+}
+.roomContainer .memeberContainer{
+    width: 280px;
+    height: 100vh;
+    background-color: #303641;
+    flex: 0 0 auto;
+        border-left: 1px solid #5c6063;
+}
+.roomContainer .memeberContainer h1{
+    font-size: 27px;
+    width: 100%;
+    margin: 20px 0 35px;
+    color: #ffffff;
+    text-align: center;
+    border-bottom: 1px solid #343a45;
+}
+.roomContainer .memeberContainer .memberList{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 20px;
+}
+ .roomContainer .memeberContainer .memberList li {
+    position: relative;
+    margin: 0;
+    font-size: 12px;
+    border-bottom: 1px solid rgba(69, 74, 84, 0.7);
+}
+.roomContainer .memeberContainer .memberList li a {
+    display: block;
+    margin: 0;
+    padding: 10px;
+}
+.roomContainer .memeberContainer .memberList li a em{
+    font-size: 18px;
+}
+.roomContainer .memeberContainer .memberList li a .active-status {
+    display: inline-block;
+  margin: 0 auto;
+  width: 15px;
+  height: 15px;
+  background-color: #ABFF00;
+  border-radius: 50%;
+  /*box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #89FF00 0 2px 12px;*/
+}
+.roomContainer .memeberContainer .memberList li a .inactive-status {
+     display: inline-block;
+     margin: 0 auto;
+  width: 15px;
+  height: 15px;
+  background-color: #F00;
+  border-radius: 50%;
+  /*box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 12px;*/
+  -webkit-animation: blinkRed 0.5s infinite;
+  -moz-animation: blinkRed 0.5s infinite;
+  -ms-animation: blinkRed 0.5s infinite;
+  -o-animation: blinkRed 0.5s infinite;
+  animation: blinkRed 0.5s infinite;
+}
+
+@-webkit-keyframes blinkRed {
+    from { background-color: #F00; }
+    50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
+    to { background-color: #F00; }
+}
+@-moz-keyframes blinkRed {
+    from { background-color: #F00; }
+    50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
+    to { background-color: #F00; }
+}
+@-ms-keyframes blinkRed {
+    from { background-color: #F00; }
+    50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
+    to { background-color: #F00; }
+}
+@-o-keyframes blinkRed {
+    from { background-color: #F00; }
+    50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
+    to { background-color: #F00; }
+}
+@keyframes blinkRed {
+    from { background-color: #F00; }
+    50% { background-color: #A00; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 0;}
+    to { background-color: #F00; }
+}
+.roomContainer .messageContainer .messagelistContainer{
+    width: 100%;
+        display: block;
+    position: relative;
+    bottom: 0;
+    height: calc(100% - 75px);
+    overflow: hidden;
+}
+.roomContainer .messageContainer .messagelistContainer .messageList{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.roomContainer .messageContainer .messagelistContainer .messageList li{
+        width: 100%;
+    display: block;
+    /*background-color: #ffffff;*/
+    margin: 20px 0px;
+    padding: 10px;
+        height: auto;
+}
+.roomContainer .messageContainer .messagelistContainer .messageList li .messageContent{
+    width: 80%;
+    font-size: 12px;
+    display: block;  
+    position: relative;
+    padding: 10px;      
+}
+.roomContainer .messageContainer .messagelistContainer .messageList li h3{
+        width: 100%;
+    font-size: 16px;
+    font-family: 'Cabin', sans-serif!important;
+    display: block;
+    margin: 10px 0 0px;
+    padding: 10px 0 10px 10px;
+    background-color: #2483c5;
+    color: #ffffff;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.roomContainer .messageContainer .messagelistContainer .messageList li p{
+   width: 100%;
+    font-size: 15px;
+    font-family: 'Cabin', sans-serif!important;
+    display: block;
+    margin: 0;
+    padding: 10px 0 10px 10px;
+    background-color: #a0c8e4;
+    color: #ffffff;
+}
+.roomContainer .messageContainer .messagelistContainer .messageList li span{
+        width: 100%;
+    font-size: 14px;
+    font-family: 'Cabin', sans-serif!important;
+    display: block;
+    font-style: italic;
+    margin: 0;
+    padding: 10px 0 10px 10px;
+    background-color: #a0c8e4;
+    color: #ffffff;
+}
+.roomContainer .messageContainer .messageInputBox{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    height: 75px;
+}
+.roomContainer .messageContainer .messageInputBox input[type=text]{
+        height: 75px;
+        font-size: 30px;
+}
+.roomContainer .messageContainer .messageInputBox .input-group-btn .btn{
+        height: 75px;
+        font-size: 30px;
 }
