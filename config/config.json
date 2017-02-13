@@ -1,8 +1,8 @@
 {
     "dbURL" : "mongodb://admin:admin@ds155737.mlab.com:55737/mysecret12",
     "secretKey" : "DL2CV975",
-    "S3AccessKey" : "AKIAJNFGHDYYHLBHYMZQ",
-    "S3Secret" : "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",
-    "S3Bucket" : "mysecret12"
+    "S3AccessKey" : "XXXXXXXXXXX",
+    "S3Secret" : "XXXXXXXXXX",
+    "S3Bucket" : "XXXXXXX"
 
 }
